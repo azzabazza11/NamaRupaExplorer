@@ -1,7 +1,83 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theravāda Buddhism Learning Platform</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            padding: 20px;
+        }
+
+        #menu {
+            width: 25%;
+            border-right: 1px solid #ccc;
+            padding-right: 20px;
+            margin-right: 20px;
+        }
+
+        .menu-item {
+            cursor: pointer;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .sub-menu {
+            display: none;
+            padding-left: 20px;
+        }
+
+        #content {
+            width: 70%;
+        }
+    </style>
+</head>
+
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+<div id="menu">
+    <div class="menu-item" onclick="toggleSubMenu('namaRupa')">
+        Nama Rupa
+        <div class="sub-menu" id="namaRupa">
+            <div class="menu-item" onclick="loadContent('aggregates')">Aggregates / Khandhas</div>
+            <div class="menu-item" onclick="loadContent('senseBases')">Sense Bases</div>
+        </div>
+    </div>
+</div>
+
+<div id="content">
+    <!-- Content will be loaded here -->
+</div>
+
+<script>
+        function toggleSubMenu(id) {
+            const subMenu = document.getElementById(id);
+            if (subMenu.style.display === 'none' || !subMenu.style.display) {
+                subMenu.style.display = 'block';
+            } else {
+                subMenu.style.display = 'none';
+            }
+        }
+
+        function loadContent(topic) {
+            const contentDiv = document.getElementById('content');
+            if (topic === 'aggregates') {
+                contentDiv.innerHTML = `
+                    <h2>Aggregates / Khandhas</h2>
+                    <p>Here's the content about Aggregates / Khandhas.</p>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+                `;
+            } else if (topic === 'senseBases') {
+                contentDiv.innerHTML = `
+                    <h2>Sense Bases</h2>
+                    <p>Here's the content about Sense Bases.</p>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+                `;
+            }
+        }
+    </script>
 </body>
+
 </html>
