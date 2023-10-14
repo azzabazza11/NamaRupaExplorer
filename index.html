@@ -5,43 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buddhist Teachings</title>
     <style>
-        .content {
+        .menu-item {
+            cursor: pointer;
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin: 5px 0;
+        }
+
+        .sub-menu {
             display: none;
+            margin-left: 20px;
+        }
+
+        .content {
+            margin: 20px 0;
         }
     </style>
 </head>
 <body>
 
-<div id="namaRupa" class="module">
-    <h2 onclick="toggleContent('namaRupaContent')">Nama Rupa</h2>
-    <div id="namaRupaContent" class="content">
-        <!-- Details about Nama Rupa -->
+<div class="menu-item" onclick="toggleSubMenu('namaRupa')">
+    Nama Rupa
+    <div class="sub-menu" id="namaRupa">
+        <!-- Subtopics for Nama Rupa can be added here -->
     </div>
 </div>
 
-<div id="satipatthana" class="module">
-    <h2 onclick="toggleContent('satipatthanaContent')">Satipatthana</h2>
-    <div id="satipatthanaContent" class="content">
+<div class="menu-item" onclick="toggleSubMenu('satipatthana')">
+    Satipatthana
+    <div class="sub-menu" id="satipatthana">
         <iframe width="560" height="315" src="https://www.youtube.com/embed/RAlOh1r3rm0" frameborder="0" allowfullscreen></iframe>
     </div>
 </div>
 
-<div id="fourNobleTruths" class="module">
-    <h2 onclick="toggleContent('fourNobleTruthsContent')">Four Noble Truths</h2>
-    <div id="fourNobleTruthsContent" class="content">
-        <!-- Details about Four Noble Truths -->
+<div class="menu-item" onclick="toggleSubMenu('fourNobleTruths')">
+    Four Noble Truths
+    <div class="sub-menu" id="fourNobleTruths">
+        <!-- Subtopics for Four Noble Truths can be added here -->
     </div>
 </div>
 
-<div id="eightfoldPath" class="module">
-    <h2 onclick="toggleContent('eightfoldPathContent')">Eightfold Path</h2>
-    <div id="eightfoldPathContent" class="content">
-        <!-- Details about Eightfold Path -->
+<div class="menu-item" onclick="toggleSubMenu('eightfoldPath')">
+    Eightfold Path
+    <div class="sub-menu" id="eightfoldPath">
+        <!-- Subtopics for Eightfold Path can be added here -->
     </div>
 </div>
 
 <script>
-    function toggleContent(elementId) {
+    function toggleSubMenu(elementId) {
         const content = document.getElementById(elementId);
         if(content.style.display === 'none') {
             content.style.display = 'block';
