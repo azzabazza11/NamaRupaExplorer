@@ -1,83 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Theravāda Buddhism Learning Platform</title>
+    <title>Buddhist Teachings</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            padding: 20px;
-        }
-
-        #menu {
-            width: 25%;
-            border-right: 1px solid #ccc;
-            padding-right: 20px;
-            margin-right: 20px;
-        }
-
-        .menu-item {
-            cursor: pointer;
-            padding: 10px;
-            border-bottom: 1px solid #ccc;
-        }
-
-        .sub-menu {
+        .content {
             display: none;
-            padding-left: 20px;
-        }
-
-        #content {
-            width: 70%;
         }
     </style>
 </head>
-
 <body>
-<div id="menu">
-    <div class="menu-item" onclick="toggleSubMenu('namaRupa')">
-        Nama Rupa
-        <div class="sub-menu" id="namaRupa">
-            <div class="menu-item" onclick="loadContent('aggregates')">Aggregates / Khandhas</div>
-            <div class="menu-item" onclick="loadContent('senseBases')">Sense Bases</div>
-        </div>
+
+<div id="namaRupa" class="module">
+    <h2 onclick="toggleContent('namaRupaContent')">Nama Rupa</h2>
+    <div id="namaRupaContent" class="content">
+        <!-- Details about Nama Rupa -->
     </div>
 </div>
 
-<div id="content">
-    <!-- Content will be loaded here -->
+<div id="satipatthana" class="module">
+    <h2 onclick="toggleContent('satipatthanaContent')">Satipatthana</h2>
+    <div id="satipatthanaContent" class="content">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/RAlOh1r3rm0" frameborder="0" allowfullscreen></iframe>
+    </div>
+</div>
+
+<div id="fourNobleTruths" class="module">
+    <h2 onclick="toggleContent('fourNobleTruthsContent')">Four Noble Truths</h2>
+    <div id="fourNobleTruthsContent" class="content">
+        <!-- Details about Four Noble Truths -->
+    </div>
+</div>
+
+<div id="eightfoldPath" class="module">
+    <h2 onclick="toggleContent('eightfoldPathContent')">Eightfold Path</h2>
+    <div id="eightfoldPathContent" class="content">
+        <!-- Details about Eightfold Path -->
+    </div>
 </div>
 
 <script>
-        function toggleSubMenu(id) {
-            const subMenu = document.getElementById(id);
-            if (subMenu.style.display === 'none' || !subMenu.style.display) {
-                subMenu.style.display = 'block';
-            } else {
-                subMenu.style.display = 'none';
-            }
+    function toggleContent(elementId) {
+        const content = document.getElementById(elementId);
+        if(content.style.display === 'none') {
+            content.style.display = 'block';
+        } else {
+            content.style.display = 'none';
         }
+    }
+</script>
 
-        function loadContent(topic) {
-            const contentDiv = document.getElementById('content');
-            if (topic === 'aggregates') {
-                contentDiv.innerHTML = `
-                    <h2>Aggregates / Khandhas</h2>
-                    <p>Here's the content about Aggregates / Khandhas.</p>
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
-                `;
-            } else if (topic === 'senseBases') {
-                contentDiv.innerHTML = `
-                    <h2>Sense Bases</h2>
-                    <p>Here's the content about Sense Bases.</p>
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
-                `;
-            }
-        }
-    </script>
 </body>
-
 </html>
