@@ -3,100 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buddhist Teachings</title>
+    <title>Paticcasamuppāda Star Visualization</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.18.1/cytoscape.min.js"></script>
     <style>
-        .menu-item {
-            cursor: pointer;
-            padding: 10px;
-            border: 1px solid #ddd;
-            margin: 5px 0;
-        }
-
-        .sub-menu {
-            display: none;
-            margin-left: 20px;
-        }
-
-        .sub-sub-menu {
-            display: none;
-            margin-left: 20px;
-        }
-
-        .content {
-            margin: 20px 0;
-        }
-
-        .main-content {
-            margin-left: 300px;
-            padding: 20px;
-            border: 1px solid #ddd;
+        #cy {
+            width: 80%;
+            height: 600px;
+            margin: auto;
+            display: block;
+            border: 1px solid #aaa;
         }
     </style>
 </head>
 <body>
 
-<div style="float: left; width: 280px;">
-    <!-- ... (Other topics here) ... -->
-
-    <div class="menu-item" onclick="toggleSubMenu('satipatthana'); loadContent('satipatthanaContent')">
-        Satipatthana
-        <div class="sub-menu" id="satipatthana">
-            <!-- ... (Other subtopics here) ... -->
-
-            <div class="menu-item" onclick="toggleSubMenu('mentalContents'); loadContent('mentalContentsContent')">
-                Mental Contents
-                <div class="sub-sub-menu" id="mentalContents">
-                    <div onclick="loadContent('hindrancesContent')">Hindrances</div>
-                    <div onclick="loadContent('aggregatesContent')">Aggregates</div>
-                    <div onclick="loadContent('senseSpheresContent')">Sense Spheres</div>
-                    <div onclick="loadContent('factorsOfEnlightenmentContent')">Factors of Enlightenment</div>
-                    <div onclick="loadContent('nobleTruthsContent')">Noble Truths</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="main-content" id="mainContent">
-    <!-- Content will be dynamically loaded here based on the selected topic -->
-</div>
+<div id="cy"></div>
 
 <script>
-    function toggleSubMenu(elementId) {
-        const content = document.getElementById(elementId);
-        if(content.style.display === 'none') {
-            content.style.display = 'block';
-        } else {
-            content.style.display = 'none';
-        }
-    }
-    function loadContent(contentId) {
-        const mainContent = document.getElementById('mainContent');
-        switch(contentId) {
-            // ... (Existing content loading here) ...
+    var cy = cytoscape({
+        container: document.getElementById('cy'),
 
-            case 'hindrancesContent':
-                mainContent.innerHTML = '<p>Details about Hindrances...</p>';
-                break;
-            case 'aggregatesContent':
-                mainContent.innerHTML = '<p>Details about Aggregates...</p>';
-                break;
-            // ... Add more cases for other content
-        }
-    }
-   const headers = document.querySelectorAll('h2');
-    headers.forEach(header => {
-        header.addEventListener('click', (event) => {
-            // Get the submenu for this header
-            const submenu = event.currentTarget.nextElementSibling;
-            if (submenu) {
-                toggleSubMenu(submenu.id);
+           elements: [
+            // Main Nodes
+            { data: { id: 'ignorance', label: 'Ignorance' } },
+            { data: { id: 'fabrications', label: 'Fabrications' } },
+            { data: { id: 'consciousness', label: 'Consciousness' } },
+            { data: { id: 'nameForm', label: 'Name & Form' } },
+            { data: { id: 'sixSenses', label: 'Six Senses' } },
+            { data: { id: 'contact', label: 'Contact' } },
+            { data: { id: 'feeling', label: 'Feeling' } },
+            { data: { id: 'craving', label: 'Craving' } },
+            { data: { id: 'clinging', label: 'Clinging' } },
+            { data: { id: 'becoming', label: 'Becoming' } },
+            { data: { id: 'birth', label: 'Birth' } },
+            { data: { id: 'oldAgeDeath', label: 'Old Age & Death' } },
+            // Offshoot Nodes
+            { data: { id: 'wrongView', label: 'Wrong View' } },
+            { data: { id: 'loba', label: 'Loba' } },
+            { data: { id: 'dosa', label: 'Dosa' } },
+            { data: { id: 'moha', label: 'Moha' } },
+            { data: { id: 'aggregates', label: 'Aggregates' } },
+            { data: { id: 'senseBases', label: 'Sense Bases' } },
+            // Edges for Main Nodes
+            { data: { source: 'ignorance', target: 'fabrications' } },
+            { data: { source: 'fabrications', target: 'consciousness' } },
+            { data: { source: 'consciousness', target: 'nameForm' } },
+            { data: { source: 'nameForm', target: 'sixSenses' } },
+            { data: { source: 'sixSenses', target: 'contact' } },
+            { data: { source: 'contact', target: 'feeling' } },
+            { data: { source: 'feeling', target: 'craving' } },
+            { data: { source: 'craving', target: 'clinging' } },
+            { data: { source: 'clinging', target: 'becoming' } },
+            { data: { source: 'becoming', target: 'birth' } },
+            { data: { source: 'birth', target: 'oldAgeDeath' } },
+            { data: { source: 'oldAgeDeath', target: 'ignorance' } },
+            // Edges for Offshoot Nodes
+            { data: { source: 'ignorance', target: 'wrongView' } },
+            { data: { source: 'fabrications', target: 'loba' } },
+            { data: { source: 'fabrications', target: 'dosa' } },
+            { data: { source: 'fabrications', target: 'moha' } },
+            { data: { source: 'consciousness', target: 'aggregates' } },
+            { data: { source: 'nameForm', target: 'senseBases' } },
+        ],
+
+        style: [
+            {
+                selector: 'node',
+                style: {
+                    'background-color': '#666',
+                    'label': 'data(label)',
+                    'text-wrap': 'wrap',
+                    'text-max-width': '120px'
+                }
+            },
+            {
+                selector: 'edge',
+                style: {
+                    'width': 3,
+                    'line-color': '#ccc',
+                    'target-arrow-color': '#ccc',
+                    'target-arrow-shape': 'triangle'
+                }
             }
-            // Stop the event from propagating to parent elements
-            event.stopPropagation();
-        });
+        ],
+
+        layout: {
+            name: 'preset',
+            positions: function(node) {
+                // Determine the center of the circle
+                var center = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+                var radius = 250;
+                var angleFactor = 2 * Math.PI / 12;  // 12 main nodes
+                var nodeIndex = node.data('id');
+                var mainNodes = ['ignorance', 'fabrications', 'consciousness', 'nameForm', 'sixSenses', 'contact', 'feeling', 'craving', 'clinging', 'becoming', 'birth', 'oldAgeDeath'];
+
+                if (mainNodes.includes(nodeIndex)) {
+                    var i = mainNodes.indexOf(nodeIndex);
+                    return {
+                        x: center.x + radius * Math.cos(i * angleFactor),
+                        y: center.y + radius * Math.sin(i * angleFactor)
+                    };
+                } else {
+                    var parent;
+                    var offset = 120;  // Distance from parent node
+                    switch (nodeIndex) {
+                        case 'wrongView': parent = 'ignorance'; break;
+                        case 'loba': case 'dosa': case 'moha': parent = 'fabrications'; break;
+                        case 'aggregates': parent = 'consciousness'; break;
+                        case 'senseBases': parent = 'nameForm'; break;
+                    }
+                    var parentPos = this.positions(parent);
+                    var dx = parentPos.x - center.x;
+                    var dy = parentPos.y - center.y;
+                    var len = Math.sqrt(dx * dx + dy * dy);
+                    return {
+                        x: parentPos.x + (dx / len) * offset,
+                        y: parentPos.y + (dy / len) * offset
+                    };
+                }
+            }
+        }
     });
 </script>
 
 </body>
 </html>
+
+
+
