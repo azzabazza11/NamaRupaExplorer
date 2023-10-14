@@ -7,8 +7,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.18.1/cytoscape.min.js"></script>
     <style>
         #cy {
-            width: 80%;
-            height: 600px;
+            width: 800px;
+            height: 800px;
             margin: auto;
             display: block;
             border: 1px solid #aaa;
@@ -23,7 +23,7 @@
     var cy = cytoscape({
         container: document.getElementById('cy'),
 
-           elements: [
+             elements: [
             // Main Nodes
             { data: { id: 'ignorance', label: 'Ignorance' } },
             { data: { id: 'fabrications', label: 'Fabrications' } },
@@ -65,7 +65,6 @@
             { data: { source: 'consciousness', target: 'aggregates' } },
             { data: { source: 'nameForm', target: 'senseBases' } },
         ],
-
         style: [
             {
                 selector: 'node',
@@ -87,47 +86,27 @@
             }
         ],
 
-        layout: {
-            name: 'preset',
-            positions: function(node) {
-                // Determine the center of the circle
-                var center = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-                var radius = 250;
-                var angleFactor = 2 * Math.PI / 12;  // 12 main nodes
-                var nodeIndex = node.data('id');
-                var mainNodes = ['ignorance', 'fabrications', 'consciousness', 'nameForm', 'sixSenses', 'contact', 'feeling', 'craving', 'clinging', 'becoming', 'birth', 'oldAgeDeath'];
-
-                if (mainNodes.includes(nodeIndex)) {
-                    var i = mainNodes.indexOf(nodeIndex);
-                    return {
-                        x: center.x + radius * Math.cos(i * angleFactor),
-                        y: center.y + radius * Math.sin(i * angleFactor)
-                    };
-                } else {
-                    var parent;
-                    var offset = 120;  // Distance from parent node
-                    switch (nodeIndex) {
-                        case 'wrongView': parent = 'ignorance'; break;
-                        case 'loba': case 'dosa': case 'moha': parent = 'fabrications'; break;
-                        case 'aggregates': parent = 'consciousness'; break;
-                        case 'senseBases': parent = 'nameForm'; break;
-                    }
-                    var parentPos = this.positions(parent);
-                    var dx = parentPos.x - center.x;
-                    var dy = parentPos.y - center.y;
-                    var len = Math.sqrt(dx * dx + dy * dy);
-                    return {
-                        x: parentPos.x + (dx / len) * offset,
-                        y: parentPos.y + (dy / len) * offset
-                    };
-                }
-            }
-        }
+       layout: {
+    name: 'preset',
+    positions: function( node ){
+        var positions = {
+            'ignorance': {x: 400, y: 0},
+            'fabrications': {x: 283, y: 95},
+            'consciousness': {x: 117, y: 190},
+            // ... add positions for other main nodes ...
+            'wrongView': {x: 400, y: -50},
+            'loba': {x: 233, y: 45},
+            'dosa': {x: 283, y: 145},
+            'moha': {x: 333, y: 45},
+            'aggregates': {x: 67, y: 240},
+            'senseBases': {x: 167, y: 290}
+            // ... add positions for other child nodes ...
+        };
+        return positions[ node.data('id') ];
+    }
+}
     });
 </script>
 
 </body>
 </html>
-
-
-
