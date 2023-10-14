@@ -90,6 +90,18 @@
             // ... Add more cases for other content
         }
     }
+      const menuItems = document.querySelectorAll('.menu-item');
+    menuItems.forEach(item => {
+        item.addEventListener('click', (event) => {
+            // Get the submenu for this menu item
+            const submenu = event.currentTarget.querySelector('.sub-menu, .sub-sub-menu');
+            if (submenu) {
+                toggleSubMenu(submenu.id);
+            }
+            // Stop the event from propagating to parent elements
+            event.stopPropagation();
+        });
+    });
 </script>
 
 </body>
