@@ -62,20 +62,14 @@
 </div>
 
 <script>
-    function toggleSubMenu(elementId, event) {
+    function toggleSubMenu(elementId) {
         const content = document.getElementById(elementId);
         if(content.style.display === 'none') {
             content.style.display = 'block';
         } else {
             content.style.display = 'none';
         }
-
-        // Stop the event from bubbling up to parent elements
-        if (event) {
-            event.stopPropagation();
-        }
     }
-
     function loadContent(contentId) {
         const mainContent = document.getElementById('mainContent');
         switch(contentId) {
@@ -90,11 +84,11 @@
             // ... Add more cases for other content
         }
     }
-      const menuItems = document.querySelectorAll('.menu-item');
-    menuItems.forEach(item => {
-        item.addEventListener('click', (event) => {
-            // Get the submenu for this menu item
-            const submenu = event.currentTarget.querySelector('.sub-menu, .sub-sub-menu');
+   const headers = document.querySelectorAll('h2');
+    headers.forEach(header => {
+        header.addEventListener('click', (event) => {
+            // Get the submenu for this header
+            const submenu = event.currentTarget.nextElementSibling;
             if (submenu) {
                 toggleSubMenu(submenu.id);
             }
