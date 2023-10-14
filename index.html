@@ -17,48 +17,77 @@
             margin-left: 20px;
         }
 
+        .sub-sub-menu {
+            display: none;
+            margin-left: 20px;
+        }
+
         .content {
             margin: 20px 0;
+        }
+
+        .main-content {
+            margin-left: 300px;
+            padding: 20px;
+            border: 1px solid #ddd;
         }
     </style>
 </head>
 <body>
 
-<div class="menu-item" onclick="toggleSubMenu('namaRupa')">
-    Nama Rupa
-    <div class="sub-menu" id="namaRupa">
-        <!-- Subtopics for Nama Rupa can be added here -->
+<div style="float: left; width: 280px;">
+    <!-- ... (Other topics here) ... -->
+
+    <div class="menu-item" onclick="toggleSubMenu('satipatthana'); loadContent('satipatthanaContent')">
+        Satipatthana
+        <div class="sub-menu" id="satipatthana">
+            <!-- ... (Other subtopics here) ... -->
+
+            <div class="menu-item" onclick="toggleSubMenu('mentalContents'); loadContent('mentalContentsContent')">
+                Mental Contents
+                <div class="sub-sub-menu" id="mentalContents">
+                    <div onclick="loadContent('hindrancesContent')">Hindrances</div>
+                    <div onclick="loadContent('aggregatesContent')">Aggregates</div>
+                    <div onclick="loadContent('senseSpheresContent')">Sense Spheres</div>
+                    <div onclick="loadContent('factorsOfEnlightenmentContent')">Factors of Enlightenment</div>
+                    <div onclick="loadContent('nobleTruthsContent')">Noble Truths</div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="menu-item" onclick="toggleSubMenu('satipatthana')">
-    Satipatthana
-    <div class="sub-menu" id="satipatthana">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/RAlOh1r3rm0" frameborder="0" allowfullscreen></iframe>
-    </div>
-</div>
-
-<div class="menu-item" onclick="toggleSubMenu('fourNobleTruths')">
-    Four Noble Truths
-    <div class="sub-menu" id="fourNobleTruths">
-        <!-- Subtopics for Four Noble Truths can be added here -->
-    </div>
-</div>
-
-<div class="menu-item" onclick="toggleSubMenu('eightfoldPath')">
-    Eightfold Path
-    <div class="sub-menu" id="eightfoldPath">
-        <!-- Subtopics for Eightfold Path can be added here -->
-    </div>
+<div class="main-content" id="mainContent">
+    <!-- Content will be dynamically loaded here based on the selected topic -->
 </div>
 
 <script>
-    function toggleSubMenu(elementId) {
+    function toggleSubMenu(elementId, event) {
         const content = document.getElementById(elementId);
         if(content.style.display === 'none') {
             content.style.display = 'block';
         } else {
             content.style.display = 'none';
+        }
+
+        // Stop the event from bubbling up to parent elements
+        if (event) {
+            event.stopPropagation();
+        }
+    }
+
+    function loadContent(contentId) {
+        const mainContent = document.getElementById('mainContent');
+        switch(contentId) {
+            // ... (Existing content loading here) ...
+
+            case 'hindrancesContent':
+                mainContent.innerHTML = '<p>Details about Hindrances...</p>';
+                break;
+            case 'aggregatesContent':
+                mainContent.innerHTML = '<p>Details about Aggregates...</p>';
+                break;
+            // ... Add more cases for other content
         }
     }
 </script>
