@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paṭiccasamuppāda sketch</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.18.1/cytoscape.min.js"></script>
+    <style>
+        body { font-family: system-ui, sans-serif; margin: 0; background: #16130f; color: #f3ead7; }
+        header { padding: 16px 20px; }
+        a { color: #d4b56a; }
+        #cy {
+            width: min(800px, 100%);
+            height: 800px;
+            margin: auto;
+            display: block;
+            border: 1px solid #aaa3;
+        }
+        .note { max-width: 800px; margin: 0 auto 16px; padding: 0 16px; color: #b7ab93; }
+    </style>
+</head>
+<body>
+<header>
+    <a href="../index.html">← Nama-Rūpa Explorer</a>
+    <h1>Paṭiccasamuppāda sketch</h1>
+</header>
+<p class="note">Early prototype kept for reference. The next visual pass will complete node positions and link each nidāna into the 37-factor catalog.</p>
+<div id="cy"></div>
+<script>
+    var cy = cytoscape({
+        container: document.getElementById('cy'),
+        elements: [
+            { data: { id: 'ignorance', label: 'Ignorance' } },
+            { data: { id: 'fabrications', label: 'Fabrications' } },
+            { data: { id: 'consciousness', label: 'Consciousness' } },
+            { data: { id: 'nameForm', label: 'Name & Form' } },
+            { data: { id: 'sixSenses', label: 'Six Senses' } },
+            { data: { id: 'contact', label: 'Contact' } },
+            { data: { id: 'feeling', label: 'Feeling' } },
+            { data: { id: 'craving', label: 'Craving' } },
+            { data: { id: 'clinging', label: 'Clinging' } },
+            { data: { id: 'becoming', label: 'Becoming' } },
+            { data: { id: 'birth', label: 'Birth' } },
+            { data: { id: 'oldAgeDeath', label: 'Old Age & Death' } },
+            { data: { id: 'wrongView', label: 'Wrong View' } },
+            { data: { id: 'loba', label: 'Lobha' } },
+            { data: { id: 'dosa', label: 'Dosa' } },
+            { data: { id: 'moha', label: 'Moha' } },
+            { data: { id: 'aggregates', label: 'Aggregates' } },
+            { data: { id: 'senseBases', label: 'Sense Bases' } },
+            { data: { source: 'ignorance', target: 'fabrications' } },
+            { data: { source: 'fabrications', target: 'consciousness' } },
+            { data: { source: 'consciousness', target: 'nameForm' } },
+            { data: { source: 'nameForm', target: 'sixSenses' } },
+            { data: { source: 'sixSenses', target: 'contact' } },
+            { data: { source: 'contact', target: 'feeling' } },
+            { data: { source: 'feeling', target: 'craving' } },
+            { data: { source: 'craving', target: 'clinging' } },
+            { data: { source: 'clinging', target: 'becoming' } },
+            { data: { source: 'becoming', target: 'birth' } },
+            { data: { source: 'birth', target: 'oldAgeDeath' } },
+            { data: { source: 'oldAgeDeath', target: 'ignorance' } },
+            { data: { source: 'ignorance', target: 'wrongView' } },
+            { data: { source: 'fabrications', target: 'loba' } },
+            { data: { source: 'fabrications', target: 'dosa' } },
+            { data: { source: 'fabrications', target: 'moha' } },
+            { data: { source: 'consciousness', target: 'aggregates' } },
+            { data: { source: 'nameForm', target: 'senseBases' } },
+        ],
+        style: [
+            {
+                selector: 'node',
+                style: {
+                    'background-color': '#7ea37a',
+                    'color': '#f3ead7',
+                    'label': 'data(label)',
+                    'text-wrap': 'wrap',
+                    'text-max-width': '120px'
+                }
+            },
+            {
+                selector: 'edge',
+                style: {
+                    'width': 3,
+                    'line-color': '#d4b56a',
+                    'target-arrow-color': '#d4b56a',
+                    'target-arrow-shape': 'triangle',
+                    'curve-style': 'bezier'
+                }
+            }
+        ],
+        layout: {
+            name: 'preset',
+            positions: function(node) {
+                var positions = {
+                    'ignorance': {x: 400, y: 80},
+                    'fabrications': {x: 283, y: 175},
+                    'consciousness': {x: 117, y: 270},
+                    'nameForm': {x: 80, y: 400},
+                    'sixSenses': {x: 117, y: 530},
+                    'contact': {x: 283, y: 625},
+                    'feeling': {x: 400, y: 680},
+                    'craving': {x: 517, y: 625},
+                    'clinging': {x: 683, y: 530},
+                    'becoming': {x: 720, y: 400},
+                    'birth': {x: 683, y: 270},
+                    'oldAgeDeath': {x: 517, y: 175},
+                    'wrongView': {x: 400, y: 20},
+                    'loba': {x: 233, y: 125},
+                    'dosa': {x: 283, y: 225},
+                    'moha': {x: 333, y: 125},
+                    'aggregates': {x: 40, y: 230},
+                    'senseBases': {x: 20, y: 400}
+                };
+                return positions[node.data('id')];
+            }
+        }
+    });
+</script>
+</body>
+</html>

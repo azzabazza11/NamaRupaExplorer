@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Nama-Rkpa Explorer">
+  <rect width="512" height="512" rx="96" fill="#1e3a32"/>
+  <circle cx="256" cy="256" r="168" fill="none" stroke="#d4b56a" stroke-width="14"/>
+  <circle cx="256" cy="256" r="92" fill="none" stroke="#e8d9b0" stroke-width="8"/>
+  <circle cx="256" cy="256" r="22" fill="#d4b56a"/>
+  <g fill="#e8d9b0">
+    <circle cx="256" cy="88" r="16"/>
+    <circle cx="400" cy="168" r="14"/>
+    <circle cx="400" cy="344" r="14"/>
+    <circle cx="256" cy="424" r="16"/>
+    <circle cx="112" cy="344" r="14"/>
+    <circle cx="112" cy="168" r="14"/>
+    <circle cx="328" cy="108" r="10"/>
+  </g>
+</svg>

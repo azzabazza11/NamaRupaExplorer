@@ -1,0 +1,40 @@
+{
+  "id": "./",
+  "name": "Nama-Rūpa Explorer",
+  "short_name": "37 Dhammā",
+  "description": "A Theravāda study hub for the 37 bodhipakkhiyā dhammā — eight, seven, five, five, four, four, four — with sutta references and interlinked phenomena.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#16130f",
+  "theme_color": "#1e3a32",
+  "lang": "en",
+  "categories": ["education", "reference"],
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
