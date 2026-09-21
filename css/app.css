@@ -129,11 +129,42 @@ h2 { font-size: 1.45rem; }
 
 .hub {
   position: relative;
-  margin: 28px auto 12px;
-  width: min(520px, 100%);
+  margin: 12px auto 8px;
+  width: min(340px, 86vw);
   aspect-ratio: 1;
 }
-.hub svg { width: 100%; height: 100%; display: block; }
+.hub-ring {
+  position: absolute;
+  inset: 18%;
+  border: 1.5px solid color-mix(in srgb, var(--gold) 70%, transparent);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hub-node {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 72px;
+  height: 72px;
+  margin: -36px 0 0 -36px;
+  border-radius: 50%;
+  background: var(--bg-elev);
+  border: 1.5px solid var(--gold);
+  color: inherit;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  line-height: 1.05;
+  box-shadow: var(--shadow);
+  transform: rotate(calc(var(--i) * 51.428deg)) translateY(-132px) rotate(calc(var(--i) * -51.428deg));
+}
+.hub-node:hover { text-decoration: none; background: var(--bg-soft); }
+.hub-node .n {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  color: var(--gold);
+}
+.hub-node .lbl { font-size: 0.62rem; letter-spacing: 0.02em; color: var(--muted); }
 .hub-center {
   position: absolute;
   inset: 34%;
@@ -142,8 +173,8 @@ h2 { font-size: 1.45rem; }
   text-align: center;
   pointer-events: none;
 }
-.hub-center strong { font-family: var(--serif); font-size: 1.6rem; }
-.hub-center span { display: block; color: var(--muted); font-size: 0.78rem; letter-spacing: 0.08em; }
+.hub-center strong { font-family: var(--serif); font-size: 1.55rem; }
+.hub-center span { display: block; color: var(--muted); font-size: 0.72rem; letter-spacing: 0.08em; }
 
 .group-grid, .card-grid {
   display: grid;
@@ -250,13 +281,15 @@ a.chip:hover { text-decoration: none; border-color: var(--gold); }
 .crumb a { color: var(--muted); }
 
 .sutta {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: start;
   padding: 12px 0;
   border-bottom: 1px solid var(--line);
 }
 .sutta:last-child { border-bottom: 0; }
+.sutta .chip { white-space: nowrap; }
 
 .two-col {
   display: grid;
@@ -265,6 +298,11 @@ a.chip:hover { text-decoration: none; border-color: var(--gold); }
 }
 #mobile-search { display: none; }
 #search-toggle { display: none; }
+
+@media (min-width: 801px) {
+  .hub { width: 380px; }
+  .hub-node { transform: rotate(calc(var(--i) * 51.428deg)) translateY(-148px) rotate(calc(var(--i) * -51.428deg)); }
+}
 
 @media (max-width: 800px) {
   .two-col { grid-template-columns: 1fr; }

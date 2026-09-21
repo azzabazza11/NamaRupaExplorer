@@ -94,31 +94,28 @@ function factorRow(factor) {
 }
 
 function hubSvg() {
-  const cx = 260;
-  const cy = 260;
-  const r = 168;
+  const labels = {
+    magga: "Path",
+    bojjhanga: "Awakening",
+    indriya: "Faculties",
+    bala: "Powers",
+    satipatthana: "Mindfulness",
+    padhana: "Striving",
+    iddhipada: "Bases",
+  };
   return `
-    <div class="hub" aria-hidden="false">
-      <svg viewBox="0 0 520 520" role="img" aria-label="Seven groups around the 37">
-        <circle cx="${cx}" cy="${cy}" r="${r + 36}" fill="none" stroke="currentColor" opacity="0.08"/>
-        <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#d4b56a" stroke-width="2" opacity="0.7"/>
-        ${GROUPS.map((g, i) => {
-          const angle = (Math.PI * 2 * i) / GROUPS.length - Math.PI / 2;
-          const x = cx + Math.cos(angle) * r;
-          const y = cy + Math.sin(angle) * r;
-          return `
-            <a href="#/group/${g.id}">
-              <circle cx="${x}" cy="${y}" r="34" fill="#201c16" stroke="#d4b56a" stroke-width="1.5"/>
-              <text x="${x}" y="${y - 4}" text-anchor="middle" fill="#d4b56a" font-size="16" font-family="serif">${g.n}</text>
-              <text x="${x}" y="${y + 14}" text-anchor="middle" fill="currentColor" font-size="8">${esc(g.short)}</text>
-            </a>`;
-        }).join("")}
-      </svg>
+    <div class="hub" role="navigation" aria-label="Seven groups around the 37">
+      <div class="hub-ring"></div>
+      ${GROUPS.map(
+        (g, i) => `
+        <a class="hub-node" href="#/group/${g.id}" style="--i:${i}">
+          <span class="n">${g.n}</span>
+          <span class="lbl">${esc(labels[g.id])}</span>
+        </a>`,
+      ).join("")}
       <div class="hub-center">
-        <div>
-          <strong>37</strong>
-          <span>bodhipakkhiyā</span>
-        </div>
+        <strong>37</strong>
+        <span>bodhipakkhiyā</span>
       </div>
     </div>`;
 }

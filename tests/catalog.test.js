@@ -50,7 +50,10 @@ for (const p of PHENOMENA) {
 }
 
 assert.ok(Object.keys(SUTTAS).length >= 20);
-assert.ok(searchCatalog("sati").factors.length >= 4);
+const sati = searchCatalog("sati");
+assert.ok(sati.factors.some((f) => f.id === "samma-sati"));
+assert.ok(!sati.factors.some((f) => f.id === "samma-ditthi"), "sati should not match cessation-in-right-view");
+assert.ok(sati.factors.length >= 4);
 assert.ok(searchCatalog("MN 10").suttas.length >= 1);
 assert.ok(searchCatalog("craving").phenomena.length >= 1);
 

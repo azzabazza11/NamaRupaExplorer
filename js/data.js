@@ -1268,17 +1268,33 @@ export function factorsForPhenomenon(phenomenonId) {
   return [...map.values()];
 }
 
+function fieldScore(parts, q) {
+  const text = parts.filter(Boolean).join(" ").toLowerCase();
+  if (!text) return 0;
+  if (text === q) return 4;
+  const tokens = text.split(/[^\p{L}\p{N}]+/u).filter(Boolean);
+  if (tokens.includes(q)) return 3;
+  if (tokens.some((t) => t.startsWith(q))) return 2;
+  if (q.length >= 5 && text.includes(q)) return 1;
+  return 0;
+}
+
 export function searchCatalog(query) {
   const q = query.trim().toLowerCase();
   if (!q) return { groups: [], factors: [], phenomena: [], suttas: [], threads: [] };
-  const hit = (parts) => parts.filter(Boolean).join(" ").toLowerCase().includes(q);
+  const rank = (items, fields) =>
+    items
+      .map((item) => ({ item, score: fieldScore(fields(item), q) }))
+      .filter((row) => row.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .map((row) => row.item);
 
   return {
-    groups: GROUPS.filter((g) => hit([g.english, g.pali, g.short, g.gloss, g.essence])),
-    factors: FACTORS.filter((f) => hit([f.english, f.pali, f.essence, f.practice, f.formula])),
-    phenomena: PHENOMENA.filter((p) => hit([p.english, p.pali, p.essence, p.kind])),
-    suttas: Object.values(SUTTAS).filter((s) => hit([s.ref, s.title, s.pali, s.note])),
-    threads: THREADS.filter((t) => hit([t.english, t.pali, t.essence])),
+    groups: rank(GROUPS, (g) => [g.english, g.pali, g.short, g.gloss, String(g.n)]),
+    factors: rank(FACTORS, (f) => [f.english, f.pali, f.essence, f.practice]),
+    phenomena: rank(PHENOMENA, (p) => [p.english, p.pali, p.essence, p.kind]),
+    suttas: rank(Object.values(SUTTAS), (s) => [s.ref, s.title, s.pali, s.note]),
+    threads: rank(THREADS, (t) => [t.english, t.pali, t.essence]),
   };
 }
 
