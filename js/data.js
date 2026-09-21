@@ -1290,11 +1290,11 @@ export function searchCatalog(query) {
       .map((row) => row.item);
 
   return {
-    groups: rank(GROUPS, (g) => [g.english, g.pali, g.short, g.gloss, String(g.n)]),
-    factors: rank(FACTORS, (f) => [f.english, f.pali, f.essence, f.practice]),
-    phenomena: rank(PHENOMENA, (p) => [p.english, p.pali, p.essence, p.kind]),
-    suttas: rank(Object.values(SUTTAS), (s) => [s.ref, s.title, s.pali, s.note]),
-    threads: rank(THREADS, (t) => [t.english, t.pali, t.essence]),
+    groups: rank(GROUPS, (g) => (q.length <= 4 ? [g.english, g.pali, g.short, String(g.n)] : [g.english, g.pali, g.short, g.gloss, String(g.n)])),
+    factors: rank(FACTORS, (f) => (q.length <= 4 ? [f.english, f.pali] : [f.english, f.pali, f.essence, f.practice])),
+    phenomena: rank(PHENOMENA, (p) => (q.length <= 4 ? [p.english, p.pali] : [p.english, p.pali, p.essence, p.kind])),
+    suttas: rank(Object.values(SUTTAS), (s) => [s.ref, s.title, s.pali]),
+    threads: rank(THREADS, (t) => (q.length <= 4 ? [t.english, t.pali] : [t.english, t.pali, t.essence])),
   };
 }
 

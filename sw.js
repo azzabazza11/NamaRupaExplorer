@@ -1,4 +1,4 @@
-const CACHE = "nre-37-v2";
+const CACHE = "nre-37-v3";
 
 const ASSETS = [
   "./",
