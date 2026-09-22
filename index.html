@@ -1,112 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paticcasamuppāda Star Visualization</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.18.1/cytoscape.min.js"></script>
-    <style>
-        #cy {
-            width: 800px;
-            height: 800px;
-            margin: auto;
-            display: block;
-            border: 1px solid #aaa;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1e3a32">
+  <meta name="description" content="Study hub for the 37 bodhipakkhiyā dhammā in groups 8 7 5 5 4 4 4, with sutta pointers and interlinked phenomena.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="37 Dhammā">
+  <title>Nama-Rūpa Explorer</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="./css/app.css">
 </head>
 <body>
-
-<div id="cy"></div>
-
-<script>
-    var cy = cytoscape({
-        container: document.getElementById('cy'),
-
-             elements: [
-            // Main Nodes
-            { data: { id: 'ignorance', label: 'Ignorance' } },
-            { data: { id: 'fabrications', label: 'Fabrications' } },
-            { data: { id: 'consciousness', label: 'Consciousness' } },
-            { data: { id: 'nameForm', label: 'Name & Form' } },
-            { data: { id: 'sixSenses', label: 'Six Senses' } },
-            { data: { id: 'contact', label: 'Contact' } },
-            { data: { id: 'feeling', label: 'Feeling' } },
-            { data: { id: 'craving', label: 'Craving' } },
-            { data: { id: 'clinging', label: 'Clinging' } },
-            { data: { id: 'becoming', label: 'Becoming' } },
-            { data: { id: 'birth', label: 'Birth' } },
-            { data: { id: 'oldAgeDeath', label: 'Old Age & Death' } },
-            // Offshoot Nodes
-            { data: { id: 'wrongView', label: 'Wrong View' } },
-            { data: { id: 'loba', label: 'Loba' } },
-            { data: { id: 'dosa', label: 'Dosa' } },
-            { data: { id: 'moha', label: 'Moha' } },
-            { data: { id: 'aggregates', label: 'Aggregates' } },
-            { data: { id: 'senseBases', label: 'Sense Bases' } },
-            // Edges for Main Nodes
-            { data: { source: 'ignorance', target: 'fabrications' } },
-            { data: { source: 'fabrications', target: 'consciousness' } },
-            { data: { source: 'consciousness', target: 'nameForm' } },
-            { data: { source: 'nameForm', target: 'sixSenses' } },
-            { data: { source: 'sixSenses', target: 'contact' } },
-            { data: { source: 'contact', target: 'feeling' } },
-            { data: { source: 'feeling', target: 'craving' } },
-            { data: { source: 'craving', target: 'clinging' } },
-            { data: { source: 'clinging', target: 'becoming' } },
-            { data: { source: 'becoming', target: 'birth' } },
-            { data: { source: 'birth', target: 'oldAgeDeath' } },
-            { data: { source: 'oldAgeDeath', target: 'ignorance' } },
-            // Edges for Offshoot Nodes
-            { data: { source: 'ignorance', target: 'wrongView' } },
-            { data: { source: 'fabrications', target: 'loba' } },
-            { data: { source: 'fabrications', target: 'dosa' } },
-            { data: { source: 'fabrications', target: 'moha' } },
-            { data: { source: 'consciousness', target: 'aggregates' } },
-            { data: { source: 'nameForm', target: 'senseBases' } },
-        ],
-        style: [
-            {
-                selector: 'node',
-                style: {
-                    'background-color': '#666',
-                    'label': 'data(label)',
-                    'text-wrap': 'wrap',
-                    'text-max-width': '120px'
-                }
-            },
-            {
-                selector: 'edge',
-                style: {
-                    'width': 3,
-                    'line-color': '#ccc',
-                    'target-arrow-color': '#ccc',
-                    'target-arrow-shape': 'triangle'
-                }
-            }
-        ],
-
-       layout: {
-    name: 'preset',
-    positions: function( node ){
-        var positions = {
-            'ignorance': {x: 400, y: 0},
-            'fabrications': {x: 283, y: 95},
-            'consciousness': {x: 117, y: 190},
-            // ... add positions for other main nodes ...
-            'wrongView': {x: 400, y: -50},
-            'loba': {x: 233, y: 45},
-            'dosa': {x: 283, y: 145},
-            'moha': {x: 333, y: 45},
-            'aggregates': {x: 67, y: 240},
-            'senseBases': {x: 167, y: 290}
-            // ... add positions for other child nodes ...
-        };
-        return positions[ node.data('id') ];
-    }
-}
-    });
-</script>
-
+  <div class="app">
+    <header class="topbar">
+      <a class="brand" href="#/">
+        <img src="./icons/icon.svg" alt="">
+        <span class="brand-text">
+          <strong>Nama-Rūpa Explorer</strong>
+          <span>37 bodhipakkhiyā dhammā</span>
+        </span>
+      </a>
+      <div class="search-wrap" id="desktop-search">
+        <input id="global-search" type="search" placeholder="Search factors, suttas, phenomena" aria-label="Search">
+      </div>
+      <button class="icon-btn" id="search-toggle" type="button" aria-label="Search">⌕</button>
+      <button class="icon-btn" id="theme-toggle" type="button" aria-label="Toggle theme">◐</button>
+    </header>
+    <div id="mobile-search" class="search-wrap">
+      <input id="mobile-search-input" type="search" placeholder="Search the 37 and related Dhamma" aria-label="Mobile search">
+    </div>
+    <div class="offline-banner">You are offline. Cached pages and catalog remain available.</div>
+    <main id="app"></main>
+  </div>
+  <nav class="nav" aria-label="Primary">
+    <a href="#/" data-nav="home">Hub</a>
+    <a href="#/groups" data-nav="groups">Sets</a>
+    <a href="#/threads" data-nav="threads">Links</a>
+    <a href="#/phenomena" data-nav="phenomena">Phenomena</a>
+    <a href="#/search" data-nav="search">Search</a>
+  </nav>
+  <script type="module" src="./js/app.js"></script>
 </body>
 </html>

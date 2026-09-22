@@ -1,0 +1,10 @@
+{
+  "name": "nama-rupa-explorer",
+  "private": true,
+  "type": "module",
+  "description": "PWA hub for studying the 37 bodhipakkhiyā dhammā",
+  "scripts": {
+    "start": "python3 -m http.server 8080 --bind 127.0.0.1",
+    "test": "node tests/catalog.test.js"
+  }
+}
